@@ -1,0 +1,46 @@
+{% extends '../partials/_layout.html' %}
+
+{% block title %} Home page {% endblock %}
+
+{% block head %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Answers: </h2>
+  <hr />
+  {% if answers.length > 0 %}
+    {% for answer in answers %}
+      <article>
+        <p>Number of answer: {{answer.id}}</p>
+        <p>Description of the answer: {{ answer.body }}</p>
+        <a href="/questions/{{ question_id }}/answers/{{answer.id}}"> Check this answer </a>
+        <!--
+        <form id="answer-comment" class="newAnswerComment" action="/questions/{{ question_id }}/answers/{{answer.id}}/comments" method="post">
+          <fieldset>
+            <legend>New comment</legend>
+            <label for="content">Comment: </label><textarea rows="4" cols="50" name="content" required title="Please provide a comment"></textarea>
+            <input type="submit" value="New comment">
+          </fieldset>
+        </form>
+        -->
+      </article>
+      <hr />
+    {% endfor %}
+    {%else%}
+    <article>
+      <p>No answers</p>
+    </article>
+  {%endif%}
+  <a href="/questions/{{question_id}}"> Go back </a>
+</div> <!-- container-->
+{% endblock %}
+{% block footer %}<footer></footer>{% endblock %}
+{% block jsdefaults %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

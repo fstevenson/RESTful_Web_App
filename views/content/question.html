@@ -1,0 +1,85 @@
+{% extends '../partials/_layout.html' %}
+
+{% block title %} Home page {% endblock %}
+
+{% block head %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<article>
+  <h2>Details of the question</h2>
+  <hr/>
+  <form action="/questions/{{ question.id }}?_method=PUT" method="POST">
+    <label for="title-id">Title: </label><input type="text" id="title-id" name="title" value="{{ question.title }}">
+    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="content-id" name="content">{{question.content}}</textarea>
+    <input type="submit" value="Update question">
+  </form>
+  <p>Created at: {{ date }} </p>
+</article>
+<form action="/questions/{{ question.id }}?_method=DELETE" method="POST">
+  <input type="submit" value="Delete question">
+</form>
+  <hr />
+  <h2>Answers: </h2>
+  <hr />
+  {% if question.answers.length > 0 %}
+  <a href="/questions/{{question.id}}/answers">Check answers</a>
+  <hr />
+	{% for answer in question.answers %}
+  <article>
+    <p>Number of answer: {{answer.id}}</p>
+    <p>Description: {{ answer.body }}</p>
+    <a href="/questions/{{question.id}}/answers/{{answer.id}}"> Check this answer </a>
+  </article>
+  <hr />
+  {%endfor%}
+  {%else%}
+  <article>
+    <p>No answers</p>
+  </article>
+  {%endif%}
+  <form id="new-answer" class="newAnswer" action="/questions/{{ question.id }}/answers" method="post">
+  <fieldset>
+    <legend>New answer</legend>
+    <label for="content">Answer: </label><textarea rows="4" cols="50" name="content" required title="Please provide a detailed answer"></textarea>
+    <input type="submit" value="New answer">
+  </fieldset>
+</form>
+<h2>Comments: </h2>
+<hr />
+{% if question.comments.length > 0 %}
+<a href="/questions/{{question.id}}/comments">Check comments</a>
+<hr />
+{% for comment in question.comments %}
+<article>
+  <p>Number of comment: {{comment.id}}</p>
+  <p>Description: {{ comment.body }} </p>
+  <a href="/questions/{{question.id}}/comments/{{comment.id}}"> Check this comment </a>
+</article>
+<hr />
+{%endfor%}
+{%else%}
+<article>
+  <p>No comments</p>
+</article>
+{%endif%}
+<form id="new-comment" class="newComment" action="/questions/{{ question.id }}/comments" method="post">
+<fieldset>
+  <legend>New comment</legend>
+  <label for="content">Comment: </label><textarea rows="4" cols="50" name="content" required title="Please provide a comment"></textarea>
+  <input type="submit" value="New comment">
+</fieldset>
+</form>
+</div> <!-- container-->
+<a href="/questions"> Go back </a>
+{% endblock %}
+{% block footer %}<footer></footer>{% endblock %}
+{% block jsdefaults %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

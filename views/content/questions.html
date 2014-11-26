@@ -1,0 +1,44 @@
+{% extends '../partials/_layout.html' %}
+
+{% block title %} Home page {% endblock %}
+
+{% block head %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ pagename|title }}</h1>
+  {% if questions.length > 0 %}
+  <ul>
+	{% for question in questions %}
+	    <li{% if loop.first %} class="first"{% endif %}>
+	      <a href="/questions/{{ question.id }}"   >{{ question.title }} {{ question.createdAt|date('F jS, Y') }} </a><a href="/questions/{{ question.id }}/answers">Answers</a>
+        <a href="/questions/{{ question.id }}/comments">Comments</a>
+	    </li>
+	  {% endfor %}
+  </ul>
+  {%else%}
+  <p> No questions </p>
+  {%endif%}
+  <hr />
+  <form id="new-question" class="newQuestion" action="/questions" method="post">
+  <fieldset>
+    <legend>Create new question</legend>
+    <label for="title">Title: </label><input type="text" name="title" id="question-title" required title="Please provide a title for the question">
+    <label for="content">Content: </label><textarea name="content" required title="Please provide details for your question"></textarea>
+    <input type="submit" value="New question">
+  </fieldset>
+</form>
+  
+  
+</div> <!-- container-->
+{% endblock %}
+{% block footer %}<footer></footer>{% endblock %}
+{% block jsdefaults %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

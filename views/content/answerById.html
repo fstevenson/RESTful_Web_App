@@ -1,0 +1,61 @@
+{% extends '../partials/_layout.html' %}
+
+{% block title %} Home page {% endblock %}
+
+{% block head %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Details of the answer</h2>
+  <hr />
+  <form action="/questions/{{ question_id }}/answers/{{answer.id}}?_method=PUT" method="POST">
+    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="content-id" name="content">{{answer.body}}</textarea>
+    <input type="submit" value="Update answer">
+  </form>
+  <article>
+    <p>Created at: {{createdAt}}</p>
+  </article>
+   <form action="/questions/{{ question_id }}/answers/{{answer.id}}?_method=DELETE" method="POST">
+    <input type="submit" value="Delete answer">
+  </form>
+  <hr />
+  {% if answer.comments.length > 0 %}
+  <hr />
+  <a href="/questions/{{ question_id }}/answers/{{answer.id}}/comments">Check comments</a>
+  <hr />
+  <h3>Comments related to the answer </h3>
+  <hr />
+    {% for comment in answer.comments %}
+      <article>
+        <p>Number of comment: {{comment.id}}</p>
+        <p>Description of the comment: {{ comment.body }}</p>
+        <a href="/questions/{{ question_id }}/answers/{{answer.id}}/comments/{{comment.id}}"> Check this comment </a>
+      </article>
+      <hr />
+    {% endfor %}
+    {%else%}
+    <article>
+      <p>No comments</p>
+      <hr />
+    </article>
+  {%endif%}
+<form id="answer-comment" class="newAnswerComment" action="/questions/{{ question_id }}/answers/{{answer.id}}/comments" method="post">
+  <fieldset>
+    <legend>New comment</legend>
+    <label for="content">Comment: </label><textarea rows="4" cols="50" name="content" required title="Please provide a comment"></textarea>
+    <input type="submit" value="New comment">
+  </fieldset>
+</form>
+<a href="/questions/{{ question_id }}/answers"> Go back </a>
+</div> <!-- container-->
+{% endblock %}
+{% block footer %}<footer></footer>{% endblock %}
+{% block jsdefaults %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

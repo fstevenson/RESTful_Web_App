@@ -1,0 +1,54 @@
+- What information should be displayed on the "root" page?
+	+ its up to us.
+
+- What browser should our front-end support?
+	+ W3C validator for HTML and CSS
+
+- What response should we get when updating or deleting a question?
+	+ it depends. Successful (2xx - success/is more proper or 3xx) or unsuccessful. JSON item updated, otherwise just a message.
+	+ avoid 5xx messages.
+
+- What should be the response to /questions/1/answers in HTML & JSON given that we already return the answers in /questions/1
+	+ 
+/questions/1
+{
+	'question_text' : 'Whatd does next() do in express?',
+	'id' : 1,
+	'answers' : [
+		{
+			id: 1,
+			'content' : 'I have no idea'
+		},
+		{
+			id: 2, 
+			'content' : 'I know but I am not telling you...'
+		}
+
+	]
+}
+
+* /device/1/sensors/1/readings
+
+/questions/1/answers/
+ + even there is repetition, consistency
+
+- what happens if the requested content format is neither HTML or JSON
+	+ 4xx client error - not supported. content not supported - 406.
+	+ xml and 5xx error or if xml and return json => mistake.
+
+- When deleting a resource, what do you do with the related items (children)?
+	+ up to us. don't do it.
+
+- next() in express?
+	+ express does something for you, like a plugin -- middleware => middle between the server and client logic.
+	+ next() to say that you are done with this middleware, you can go to the next one.
+
+- how to define models for comments?
+	+ one for answers
+	+ one for questions
+
+- hasOne -- getting errors..
+
+- when deleting a resource, what do you do with the related items (children) in ORM?
+
+- how do we send a "not found error" to the client?

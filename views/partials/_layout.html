@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Web site to create, find or answer questions">
+  <meta name="keywords" content="programming, questions, answers">
+  <meta name="author" content="group 19">
+  <title>{% block title %}{% endblock %}</title>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/questions">Questions</a>
+  <a href="/questions/ask">Ask Question </a>
+  <div id="search-container">
+    <form id="search" action="/search" method="get" autocomplet="off">
+    <input name="q" type="text" placeholder="search" autocomplete="off">
+    </form>
+  </div>
+</nav>
+  {% block content %}{% endblock %}
+  {% block footer %}{% endblock %}
+  {% block jsdefaults %}{% endblock %}
+</body>
+</html>
