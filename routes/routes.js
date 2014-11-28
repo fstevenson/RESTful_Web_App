@@ -13,7 +13,6 @@ var database = require('../models/database');
 // http://phaninder.com/posts/put-and-delete-can-they-be-used-as-html-form-methods/
 // https://github.com/expressjs/method-override
 
-
 //app.enable('strict routing');
 app.use(orm.express(database.connectionString));
 
