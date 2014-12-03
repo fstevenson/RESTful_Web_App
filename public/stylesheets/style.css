@@ -112,5 +112,7 @@ footer{
     bottom:0;
 	background-color: navy;
 	font-size: 20px;
-	text-align:center
+	text-align:center;
+	color: silver;
+	box-shadow:0 1px 3px rgba(0,0,0,0.3);
 }
