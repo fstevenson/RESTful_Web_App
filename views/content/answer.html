@@ -13,7 +13,7 @@
   {% if answers.length > 0 %}
     {% for answer in answers %}
       <article>
-        <p>Number of answer: {{answer.id}}</p>
+        <h4>Number of answer: {{answer.id}}</h4>
         <p>Description of the answer: {{ answer.body }}</p>
          <a href="/questions/{{ question_id }}/answers/{{answer.id}}"> Check this answer </a>
         <!--
@@ -30,7 +30,7 @@
     {% endfor %}
     {%else%}
     <article>
-      <p>No answers</p>
+      <h4>No answers</h4>
     </article>
   {%endif%}
   <a href="/questions/{{question_id}}"> Go back </a>

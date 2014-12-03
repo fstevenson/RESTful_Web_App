@@ -12,8 +12,8 @@
   <h2>Details of the question</h2>
   <hr/>
   <form action="/questions/{{ question.id }}?_method=PUT" method="POST">
-    <label for="title-id">Title: </label><input type="text" id="title-id" name="title" value="{{ question.title }}">
-    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="content-id" name="content">{{question.content}}</textarea>
+    <label for="title-id">Title: </label><input type="text" id="title" name="title" value="{{ question.title }}">
+    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="content" name="content">{{question.content}}</textarea>
     <input type="submit" value="Update question">
   </form>
   <p>Created at: {{ date }} </p>
@@ -29,7 +29,7 @@
   <hr />
 	{% for answer in question.answers %}
   <article>
-    <p>Number of answer: {{answer.id}}</p>
+    <h4>Number of answer: {{answer.id}}</h4>
     <p>Description: {{ answer.body }}</p>
     <a href="/questions/{{question.id}}/answers/{{answer.id}}"> Check this answer </a>
   </article>
@@ -43,7 +43,7 @@
   <form id="new-answer" class="newAnswer" action="/questions/{{ question.id }}/answers" method="post">
   <fieldset>
     <legend>New answer</legend>
-    <label for="content">Answer: </label><textarea rows="4" cols="50" name="content" required title="Please provide a detailed answer"></textarea>
+    <label for="content">Answer: </label><textarea rows="4" cols="50" id="acontent" name="acontent" required title="Please provide a detailed answer"></textarea>
     <input type="submit" value="New answer">
   </fieldset>
 </form>
@@ -54,7 +54,7 @@
 <hr />
 {% for comment in question.comments %}
 <article>
-  <p>Number of comment: {{comment.id}}</p>
+  <h4>Number of comment: {{comment.id}}</h4>
   <p>Description: {{ comment.body }} </p>
   <a href="/questions/{{question.id}}/comments/{{comment.id}}"> Check this comment </a>
 </article>
@@ -68,7 +68,7 @@
 <form id="new-comment" class="newComment" action="/questions/{{ question.id }}/comments" method="post">
 <fieldset>
   <legend>New comment</legend>
-  <label for="content">Comment: </label><textarea rows="4" cols="50" name="content" required title="Please provide a comment"></textarea>
+  <label for="content">Comment: </label><textarea rows="4" cols="50" id="cccontent3" name="ccontent3" required title="Please provide a comment"></textarea>
   <input type="submit" value="New comment">
 </fieldset>
 </form>

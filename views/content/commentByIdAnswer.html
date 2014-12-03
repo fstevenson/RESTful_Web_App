@@ -10,11 +10,11 @@
   <h2>Details of the comment</h2>
   <hr />
   <form action="/questions/{{ question_id }}/answers/{{comment.answer_id}}/comments/{{comment.id}}?_method=PUT" method="POST">
-    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="content-id" name="content">{{comment.body}}</textarea>
+    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="ccontent" name="ccontent">{{comment.body}}</textarea>
     <input type="submit" value="Update comment">
   </form>
   <article>
-    <p>Created at: {{createdAt}}<p>
+    <h4>Created at: {{createdAt}}</h4>
   </article>
   <form action="/questions/{{ question_id }}/answers/{{comment.answer_id}}/comments/{{comment.id}}?_method=DELETE" method="POST">
     <input type="submit" value="Delete comment">

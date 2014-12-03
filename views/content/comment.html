@@ -13,7 +13,7 @@
   {% if comments.length > 0 %}
     {% for comment in comments %}
       <article>
-        <p>Number of comment: {{comment.id}}</p>
+        <h4>Number of comment: {{comment.id}}</h4>
         <p>Description: {{ comment.body }}</p>
         <a href="/questions/{{ question_id }}/comments/{{comment.id}}"> Check this comment</a>
       </article>
