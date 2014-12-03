@@ -37,7 +37,7 @@
   {%endfor%}
   {%else%}
   <article>
-    <p>No answers</p>
+    <h4>No answers</h4>
   </article>
   {%endif%}
   <form id="new-answer" class="newAnswer" action="/questions/{{ question.id }}/answers" method="post">
@@ -62,7 +62,7 @@
 {%endfor%}
 {%else%}
 <article>
-  <p>No comments</p>
+  <h4>No comments</h4>
 </article>
 {%endif%}
 <form id="new-comment" class="newComment" action="/questions/{{ question.id }}/comments" method="post">
