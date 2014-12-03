@@ -145,7 +145,7 @@ app.post('/questions', function (req, res) {
 // questions/ask
 //
 // New question
-app.get('/questions/ask', function (res) {
+app.get('/questions/ask', function (req,res) {
   res.render('./content/ask', {
     pagename: 'New question'
   });
@@ -1076,7 +1076,7 @@ app.get('/search?:q', function (req, res) {
 //
 // Error
 //
- // app.get('*', function (res) {
+ // app.get('*', function (req,res) {
   // res.status(404).send('Not found, sorry!');
 // }); 
 
