@@ -147,6 +147,7 @@ app.post('/questions', function (req, res) {
 // New question
 app.get('/questions/ask', function (req,res) {
   res.render('./content/ask', {
+    pageTitle: 'ask',
     pagename: 'New question'
   });
 });
