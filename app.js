@@ -8,7 +8,6 @@ var database = require('./models/database')
 
 var routes = require('./routes/routes');
 
-
 app.engine('html', swig.renderFile);
 
 app.set('view engine', 'html');
@@ -19,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+
 
 // Swig will cache templates for you, but you can disable
 // that and use Express's caching instead, if you like:
@@ -51,7 +51,9 @@ app.use(orm.express(database.connectionString, {
 
 app.use('/', routes);
 app.use('/test', routes);
+app.use('/public', express.static(__dirname + '/public'));
 app.use('*', routes);
+
 
 /*
 /// catch 404 and forwarding to error handler
@@ -86,6 +88,6 @@ app.use(function(err, req, res, next) {
     });
 });
 */
-var server = app.listen(3001, function () {
+var server = app.listen(3000, function () {
 	console.log("server running...");
 });

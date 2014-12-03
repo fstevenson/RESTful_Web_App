@@ -1067,7 +1067,7 @@ app.get('/search?:q', function (req, res) {
   });
   res.render('./content/index', {
     pageTitle: 'index',
-    pagename: 'Results',
+    /* pagename: 'Results', */
     questions: questions
   });
 });
@@ -1076,9 +1076,9 @@ app.get('/search?:q', function (req, res) {
 //
 // Error
 //
-app.get('*', function (res) {
-  res.status(404).send('Not found, sorry!');
-});
+ // app.get('*', function (res) {
+  // res.status(404).send('Not found, sorry!');
+// }); 
 
 
 

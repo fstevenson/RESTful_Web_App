@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="stylesheet"  type="text/css" href="/public/stylesheets/style.css" />
   <meta charset="utf-8">
   <meta name="description" content="Web site to create, find or answer questions">
   <meta name="keywords" content="programming, questions, answers">
@@ -10,7 +11,8 @@
   {% endblock %}
 </head>
 <body>
-<nav>
+<header>Question & Answer Website</header>
+<div id="links">
   <a href="/">Home</a>
   <a href="/questions">Questions</a>
   <a href="/questions/ask">Ask Question </a>
@@ -19,9 +21,8 @@
     <input name="q" type="text" placeholder="search" autocomplete="off">
     </form>
   </div>
-</nav>
+</div>
   {% block content %}{% endblock %}
-  {% block footer %}{% endblock %}
-  {% block jsdefaults %}{% endblock %}
+<footer>Copyright © Southampton.co.uk</footer>
 </body>
 </html>
