@@ -10,7 +10,7 @@
   <h2>Details of the comment</h2>
   <hr />
   <form action="/questions/{{ question_id }}/answers/{{comment.answer_id}}/comments/{{comment.id}}?_method=PUT" method="POST">
-    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="ccontent" name="ccontent">{{comment.body}}</textarea>
+    <label for="content">Description: </label><textarea rows="4" cols="50" id="content" name="content">{{comment.body}}</textarea>
     <input type="submit" value="Update comment">
   </form>
   <article>

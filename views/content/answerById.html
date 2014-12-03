@@ -11,7 +11,7 @@
   <h2>Details of the answer</h2>
   <hr />
   <form action="/questions/{{ question_id }}/answers/{{answer.id}}?_method=PUT" method="POST">
-    <label for="content-id">Description: </label><textarea rows="4" cols="50" id="acontent" name="acontent">{{answer.body}}</textarea>
+    <label for="content">Description: </label><textarea rows="4" cols="50" id="content" name="content">{{answer.body}}</textarea>
     <input type="submit" value="Update answer">
   </form>
   <article>
@@ -44,7 +44,7 @@
 <form id="answer-comment" class="newAnswerComment" action="/questions/{{ question_id }}/answers/{{answer.id}}/comments" method="post">
   <fieldset>
     <legend>New comment</legend>
-    <label for="content">Comment: </label><textarea rows="4" cols="50" name="accontent" id="accontent" required title="Please provide a comment"></textarea>
+    <label for="content">Comment: </label><textarea rows="4" cols="50" name="content" id="content" required title="Please provide a comment"></textarea>
     <input type="submit" value="New comment">
   </fieldset>
 </form>
