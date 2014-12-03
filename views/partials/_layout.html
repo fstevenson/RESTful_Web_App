@@ -11,17 +11,35 @@
   {% endblock %}
 </head>
 <body>
-<header>Question & Answer Website</header>
-<div id="links">
-  <a href="/">Home</a>
-  <a href="/questions">Questions</a>
-  <a href="/questions/ask">Ask Question </a>
-  <div id="search-container">
-    <form id="search" action="/search" method="get" autocomplet="off">
-    <input name="q" type="text" placeholder="search" autocomplete="off">
-    </form>
-  </div>
-</div>
+	<div class="header">
+		<div class="container">
+			<div class="logo">
+				<img src="public/images/Q&A.jpg">
+			</div>
+			<div class="nav">
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/questions">Questions</a>
+					</li>
+					<li>
+						<a href="/questions/ask">Ask question</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+    <div class="outheader"></div>
+    <div id="search-container">
+        <form id="search" action="/search" method="get">
+			<input type="text" placeholder="Search..." required>
+            <input type="button" value="Search">
+        </form>
+    </div>
   {% block content %}{% endblock %}
 <footer>Copyright © Southampton.co.uk</footer>
 </body>

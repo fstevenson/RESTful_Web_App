@@ -4,14 +4,107 @@ body{
 	background-color: silver;
 	font-size: 12pt;
 }
-header{
-	position: fixed;
-	width:100%;
-	height:50px;
-	background-color: navy;
-	font-size: 30px;
-	text-align:center
+
+ul {
+	padding: 0;
+	margin: 0;
 }
+li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+
+.header {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 50px;
+	z-index: 10;
+	background-color: navy;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.container {
+	position: relative;
+	margin: 0 auto;
+	width: 960px;
+}
+
+.logo {
+	height: 50px;
+	float: left;
+}
+.logo img {
+	height: 50px;
+}
+.nav {
+	float: left;
+	height: 50px;
+	margin-left: 50px;
+}
+.nav ul li {
+	float: left;
+}
+.nav ul li a {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	color: silver;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.nav ul li a:hover {
+	background-color: #3592DD;
+	color: white;
+}
+
+.clear {
+	clear: both;
+}
+
+.outheader {
+	position: relative;
+	width: 100%;
+	height: 70px;
+}
+
+#search-container{
+	display: block;
+	position : center;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+form{
+    width:500px;
+	margin:10px auto;
+}
+
+.search{
+	padding:5px 15px;
+    background:rgba(50, 50, 50, 0.2);
+    border:0px solid #dbdbdb;
+	margin:10px left;
+}
+
+.button {
+        position:relative;
+        padding:6px 15px;
+        left:-8px;
+        border:2px solid #207cca;
+        background-color:#207cca;
+        color:#fafafa;
+}
+.button:hover  {
+        background-color:#fafafa;
+        color:#207cca;
+}
+
 footer{	
     position:fixed;
 	width:100%;
@@ -20,12 +113,4 @@ footer{
 	background-color: navy;
 	font-size: 20px;
 	text-align:center
-}
-#links{
-	height: 1%;
-    padding: 50px 5px;
-}
-#search-container{
-	height: 1%;
-    padding: 5px 5px;
 }
