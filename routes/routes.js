@@ -112,8 +112,11 @@ app.get('/questions', function (req, res) {
 //
 //
 app.post('/questions', function (req, res) {
-  if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
-    if (req.body.title === undefined || req.body.content === undefined || req.body.title.trim().length === 0 || req.body.content.trim().length === 0) {
+  if (req.is('json')  || req.is('application/json')
+      || req.is('html') || req.is('text/html')
+      || req.is('application/x-www-form-urlencoded')) {
+    if (req.body.title === undefined || req.body.content === undefined
+        || req.body.title.trim().length === 0 || req.body.content.trim().length === 0) {
       return res.status(400).send("There is bad syntax in the request");
     }
     req.models.question.create(
@@ -214,8 +217,10 @@ app.put('/questions/:question_id', function (req, res) {
         res.status(404).send("That answer doesn't exists");
         return;
       }
-      if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
-        if (req.body.content === undefined || req.body.content.trim().length === 0 || req.body.title === undefined || req.body.title.trim().length === 0) {
+      if (req.is('json') || req.is('application/json')
+	        || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+        if (req.body.content === undefined || req.body.content.trim().length === 0
+		        || req.body.title === undefined || req.body.title.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
         }
         console.log("ok");
@@ -246,7 +251,7 @@ app.put('/questions/:question_id', function (req, res) {
 //
 // Delete question
 //
-app.del('/questions/:question_id', function (req, res) {
+app.delete('/questions/:question_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -272,7 +277,9 @@ app.del('/questions/:question_id', function (req, res) {
           console.log(err);
         }
       });
-      if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+      if (req.is('json') || req.is('application/json')
+	        || req.is('html') || req.is('text/html')
+		      || req.is('application/x-www-form-urlencoded')) {
         question.remove(function (err) {
           if (err) {
             console.log(err);
@@ -341,7 +348,9 @@ app.post('/questions/:question_id/answers', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+    if (req.is('json') || req.is('application/json')
+	      || req.is('html') || req.is('text/html')
+	      || req.is('application/x-www-form-urlencoded')) {
       if (req.body.content === undefined || req.body.content.trim().length === 0) {
         return res.status(400).send("There is bad syntax in the request");
       }
@@ -386,15 +395,17 @@ app.get('/questions/:question_id/answers/:answer_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id': req.params.question_id}, function (err, answerExists) {
-      if (err) {
-        console.log(err);
-      }
-      if (!answerExists) {
-        res.status(404).send("Such answer doesn't exists for that question");
-        return;
-      }
-    });
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id': req.params.question_id},
+	    function (err, answerExists) {
+        if (err) {
+          console.log(err);
+        }
+        if (!answerExists) {
+          res.status(404).send("Such answer doesn't exists for that question");
+          return;
+        }
+      });
+
     req.models.answer.get(req.params.answer_id, function (err, answer) {
       if (err) {
         console.log(err);
@@ -440,53 +451,57 @@ app.put('/questions/:question_id/answers/:answer_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id}, function (err, answerExists) {
-      if (err) {
-        console.log(err);
-      }
-      if (!answerExists) {
-        res.status(404).send("Such answer for such question doesn't exists");
-        return;
-      }
-      req.models.answer.get(req.params.answer_id, function (err, answer) {
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id},
+	    function (err, answerExists) {
         if (err) {
           console.log(err);
-          res.status(404).send("That answer doesn't exists");
+        }
+        if (!answerExists) {
+          res.status(404).send("Such answer for such question doesn't exists");
           return;
         }
-        if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
-          if (req.body.content === undefined || req.body.content.trim().length === 0) {
-            return res.status(400).send("There is bad syntax in the request");
+        req.models.answer.get(req.params.answer_id, function (err, answer) {
+          if (err) {
+            console.log(err);
+            res.status(404).send("That answer doesn't exists");
+            return;
           }
-          console.log("ok");
-          answer.body = req.body.content;
-          answer.save(function (err) {
-            if (err) {
-              console.log(err);
-              res.end();
-              return;
+          if (req.is('json') || req.is('application/json') ||
+		          req.is('html') || req.is('text/html')
+				      || req.is('application/x-www-form-urlencoded')) {
+            if (req.body.content === undefined || req.body.content.trim().length === 0) {
+              return res.status(400).send("There is bad syntax in the request");
             }
-            if (req.accepts('html')) {
-              console.log("html");
-              res.redirect("/questions/" + req.params.question_id + "/answers/" + req.params.answer_id);
-            } else if (req.accepts('json')) {
-              res.status(202).send("answer updated: " + JSON.stringify(answer));
-            } else {
-              res.status(406).send("Content type not supported");
-            }
-          });
-        } else {
-          res.status(406).send("Content type not supported");
-        }
+            console.log("ok");
+            answer.body = req.body.content;
+            answer.save(function (err) {
+              if (err) {
+                console.log(err);
+                res.end();
+                return;
+              }
+              if (req.accepts('html')) {
+                console.log("html");
+                res.redirect("/questions/" + req.params.question_id + "/answers/"
+				          + req.params.answer_id);
+              } else if (req.accepts('json')) {
+                res.status(202).send("answer updated: " + JSON.stringify(answer));
+              } else {
+                res.status(406).send("Content type not supported");
+              }
+            });
+          } else {
+            res.status(406).send("Content type not supported");
+          }
+        });
       });
-    });
   });
 });
 
 //
 // Delete answer and children given a question id and answer id and comment id
 //
-app.del('/questions/:question_id/answers/:answer_id', function (req, res) {
+app.delete('/questions/:question_id/answers/:answer_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -496,7 +511,8 @@ app.del('/questions/:question_id/answers/:answer_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id}, function (err, answerExists) {
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id'
+	    : req.params.question_id}, function (err, answerExists) {
       if (err) {
         console.log(err);
       }
@@ -515,7 +531,8 @@ app.del('/questions/:question_id/answers/:answer_id', function (req, res) {
             console.log(err);
           }
         });
-        if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+        if (req.is('json') || req.is('application/json') || req.is('html')
+		        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
           answer.remove(function (err) {
             if (err) {
               console.log(err);
@@ -604,7 +621,8 @@ app.post('/questions/:question_id/answers/:answer_id/comments', function (req, r
         res.status(404).send("Such answer for such question doesn't exists");
         return;
       }
-      if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+      if (req.is('json') || req.is('application/json') || req.is('html')
+	        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
         if (req.body.content === undefined || req.body.content.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
         }
@@ -622,9 +640,11 @@ app.post('/questions/:question_id/answers/:answer_id/comments', function (req, r
             //question.setAnswer(answer_created);
             // TO-DO: add here error handling
             if (req.accepts('html')) {
-              res.redirect("/questions/" + answer.question_id + "/answers/" + answer.id + "/comments");
+              res.redirect("/questions/" + answer.question_id + "/answers/"
+			          + answer.id + "/comments");
             } else if (req.accepts('json')) {
-              res.status(201).json({"success" : true, "message" : "New comment created for answer id: " + answer.id, "comment" : comment_created});
+              res.status(201).json({"success" : true, "message"
+			          : "New comment created for answer id: " + answer.id, "comment" : comment_created});
             } else {
               res.status(406).send("Content type not supported");
             }
@@ -650,7 +670,8 @@ app.get('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id}, function (err, answerExists) {
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id'
+	    : req.params.question_id}, function (err, answerExists) {
       if (err) {
         console.log(err);
       }
@@ -665,7 +686,8 @@ app.get('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
           return;
         }
         if (comment.answer_id !== Number(req.params.answer_id)) {
-          res.status(404).send("Such comment doesn't belong to the specified question and/or answer");
+          res.status(404).send("Such comment doesn't belong to" +
+		        " the specified question and/or answer");
           return;
         }
         var tmp = comment.createdAt.toString().substring(0, 10);
@@ -702,7 +724,8 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id}, function (err, answerExists) {
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id'
+	    : req.params.question_id}, function (err, answerExists) {
       if (err) {
         console.log(err);
       }
@@ -710,7 +733,8 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
         res.status(404).send("Such answer for such question doesn't exists");
         return;
       }
-      req.models.comment.exists({'id' : req.params.comment_id, 'answer_id' : req.params.answer_id}, function (err, commentExists) {
+      req.models.comment.exists({'id' : req.params.comment_id, 'answer_id'
+	      : req.params.answer_id}, function (err, commentExists) {
         if (err) {
           console.log(err);
         }
@@ -724,7 +748,8 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
             res.status(404).send("That comment doesn't exists");
             return;
           }
-          if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+          if (req.is('json') || req.is('application/json') || req.is('html')
+		          || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
             if (req.body.content === undefined || req.body.content.trim().length === 0) {
               return res.status(400).send("There is bad syntax in the request");
             }
@@ -738,7 +763,8 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
               }
               if (req.accepts('html')) {
                 console.log("html");
-                res.redirect("/questions/" + req.params.question_id + "/answers/" + req.params.answer_id + "/comments/" + comment.id);
+                res.redirect("/questions/" + req.params.question_id + "/answers/"
+				          + req.params.answer_id + "/comments/" + comment.id);
               } else if (req.accepts('json')) {
                 res.status(202).send("comment updated: " + JSON.stringify(comment));
               } else {
@@ -757,7 +783,7 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
 //
 // Update comment given a question id and answer id and comment id
 //
-app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', function (req, res) {
+app.delete('/questions/:question_id/answers/:answer_id/comments/:comment_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -767,7 +793,8 @@ app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.answer.exists({'id' : req.params.answer_id, 'question_id' : req.params.question_id}, function (err, answerExists) {
+    req.models.answer.exists({'id' : req.params.answer_id, 'question_id'
+	    : req.params.question_id}, function (err, answerExists) {
       if (err) {
         console.log(err);
       }
@@ -775,7 +802,8 @@ app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
         res.status(404).send("Such answer for such question doesn't exists");
         return;
       }
-      req.models.comment.exists({'id' : req.params.comment_id, 'answer_id' : req.params.answer_id}, function (err, commentExists) {
+      req.models.comment.exists({'id' : req.params.comment_id, 'answer_id'
+	      : req.params.answer_id}, function (err, commentExists) {
         if (err) {
           console.log(err);
         }
@@ -789,7 +817,8 @@ app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
             res.status(404).send("That comment doesn't exists");
             return;
           }
-          if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+          if (req.is('json') || req.is('application/json') || req.is('html')
+		          || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
             comment.remove(function (err) {
               if (err) {
                 console.log(err);
@@ -798,7 +827,8 @@ app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
               }
               if (req.accepts('html')) {
                 console.log("html");
-                res.redirect("/questions/" + req.params.question_id + "/answers/" + req.params.answer_id);
+                res.redirect("/questions/" + req.params.question_id
+				          + "/answers/" + req.params.answer_id);
               } else if (req.accepts('json')) {
                 res.status(200).json({"success" : true, "message" : "comment deleted"});
               } else {
@@ -864,7 +894,8 @@ app.post('/questions/:question_id/comments', function (req, res) {
     }
     console.log(req.get("Content-type"));
     console.log(req.body);
-    if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+    if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html')
+	      || req.is('application/x-www-form-urlencoded')) {
       if (req.body.content === undefined || req.body.content.trim().length === 0) {
         return res.status(400).send("There is bad syntax in the request");
       }
@@ -906,34 +937,35 @@ app.get('/questions/:question_id/comments/:comment_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id}, function (err, commentExists) {
-      if (err) {
-        console.log(err);
-      }
-      if (!commentExists) {
-        res.status(404).send("Such comment doesn't exists for that question");
-        return;
-      }
-      req.models.comment.get(req.params.comment_id, function (err, comment) {
+    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id},
+	    function (err, commentExists) {
         if (err) {
           console.log(err);
-          res.status(404).send("Not found");
+        }
+        if (!commentExists) {
+          res.status(404).send("Such comment doesn't exists for that question");
           return;
         }
-        var tmp = comment.createdAt.toString().substring(0, 10);
-        if (req.accepts('html')) {
-          res.render('./content/commentById', {
-            comment: comment,
-            question_id: req.params.question_id,
-            createdAt: tmp
-          });
-        } else if (req.accepts('json')) {
-          res.status(200).send(JSON.stringify(comment));
-        } else {
-          res.status(406).send("Content type not supported");
-        }
+        req.models.comment.get(req.params.comment_id, function (err, comment) {
+          if (err) {
+            console.log(err);
+            res.status(404).send("Not found");
+            return;
+          }
+          var tmp = comment.createdAt.toString().substring(0, 10);
+          if (req.accepts('html')) {
+            res.render('./content/commentById', {
+              comment: comment,
+              question_id: req.params.question_id,
+              createdAt: tmp
+            });
+          } else if (req.accepts('json')) {
+            res.status(200).send(JSON.stringify(comment));
+          } else {
+            res.status(406).send("Content type not supported");
+          }
+        });
       });
-    });
   });
 });
 
@@ -951,15 +983,16 @@ app.put('/questions/:question_id/comments/:comment_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id}, function (err, commentExists) {
-      if (err) {
-        console.log(err);
-      }
-      if (!commentExists) {
-        res.status(404).send("Such comment doesn't exists for that question");
-        return;
-      }
-    });
+    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id},
+	    function (err, commentExists) {
+        if (err) {
+          console.log(err);
+        }
+        if (!commentExists) {
+          res.status(404).send("Such comment doesn't exists for that question");
+          return;
+        }
+      });
     req.models.comment.get(req.params.comment_id, function (err, comment) {
       if (err) {
         console.log(err);
@@ -967,7 +1000,8 @@ app.put('/questions/:question_id/comments/:comment_id', function (req, res) {
         return;
       }
       console.log(req.get("Content-type"));
-      if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+      if (req.is('json') || req.is('application/json') || req.is('html')
+	        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
         if (req.body.content === undefined || req.body.content.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
         }
@@ -998,7 +1032,7 @@ app.put('/questions/:question_id/comments/:comment_id', function (req, res) {
 //
 // Delete comment by ID
 //
-app.del('/questions/:question_id/comments/:comment_id', function (req, res) {
+app.delete('/questions/:question_id/comments/:comment_id', function (req, res) {
   console.log("PUT");
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
@@ -1009,22 +1043,24 @@ app.del('/questions/:question_id/comments/:comment_id', function (req, res) {
       res.status(404).send("Such question doesn't exists");
       return;
     }
-    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id}, function (err, commentExists) {
-      if (err) {
-        console.log(err);
-      }
-      if (!commentExists) {
-        res.status(404).send("Such comment doesn't exists for that question");
-        return;
-      }
-    });
+    req.models.comment.exists({'id' : req.params.comment_id, 'question_id': req.params.question_id},
+	    function (err, commentExists) {
+        if (err) {
+          console.log(err);
+        }
+        if (!commentExists) {
+          res.status(404).send("Such comment doesn't exists for that question");
+          return;
+        }
+      });
     req.models.comment.get(req.params.comment_id, function (err, comment) {
       if (err) {
         console.log(err);
         res.status(404).send("Not found");
         return;
       }
-      if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+      if (req.is('json') || req.is('application/json') || req.is('html')
+	        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
         comment.remove(function (err) {
           if (err) {
             console.log(err);
