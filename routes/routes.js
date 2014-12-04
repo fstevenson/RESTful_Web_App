@@ -1,7 +1,7 @@
 var express = require('express'),
-    bodyParser = require('body-parser'),
-    orm = require('orm'),
-    methodOverride = require('method-override');
+	bodyParser = require('body-parser'),
+	orm = require('orm'),
+	methodOverride = require('method-override');
 
 var app = express();
 var database = require('../models/database');
@@ -29,9 +29,8 @@ app.use(methodOverride('_method'));
 // Index page
 // 
 app.get('/', function (req, res) {
-  var questions = [];
-  var limit = 5;
-  var i;
+  var questions = [], limit = 5, i;
+
   req.models.question.count({}, function (err, questionsCount) {
     if (err) {
       console.log(err);
@@ -77,8 +76,8 @@ app.get('/', function (req, res) {
 //
 // All questions
 app.get('/questions', function (req, res) {
-  var questions = [];
-  var i;
+  var questions = [], i;
+
   req.models.question.find({}, ["createdAt", "Z"], function (err, results) {
     if (err) {
       console.log(err);
@@ -122,7 +121,7 @@ app.post('/questions', function (req, res) {
         title: req.body.title,
         content: req.body.content,
         createdAt: new Date()
-      }, ], // object
+      }], // object
       function (err, questions_created) {
         if (err) {
           console.log("Error: " + err);
@@ -135,7 +134,7 @@ app.post('/questions', function (req, res) {
           res.status(406).send("Content type not supported");
         }
       }
-    );
+	  );
   } else {
     res.status(406).send("Content type not supported");
   }
@@ -145,7 +144,7 @@ app.post('/questions', function (req, res) {
 // questions/ask
 //
 // New question
-app.get('/questions/ask', function (req,res) {
+app.get('/questions/ask', function (req, res) {
   res.render('./content/ask', {
     pageTitle: 'ask',
     pagename: 'New question'
@@ -247,7 +246,7 @@ app.put('/questions/:question_id', function (req, res) {
 //
 // Delete question
 //
-app.delete('/questions/:question_id', function (req, res) {
+app.del('/questions/:question_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -352,7 +351,7 @@ app.post('/questions/:question_id/answers', function (req, res) {
           body: req.body.content,
           createdAt: new Date(),
           question_id: question.id
-        }, ], // object
+        }], // object
         function (err, answer_created) {
           if (err) {
             console.log("Error: " + err);
@@ -487,7 +486,7 @@ app.put('/questions/:question_id/answers/:answer_id', function (req, res) {
 //
 // Delete answer and children given a question id and answer id and comment id
 //
-app.delete('/questions/:question_id/answers/:answer_id', function (req, res) {
+app.del('/questions/:question_id/answers/:answer_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -615,7 +614,7 @@ app.post('/questions/:question_id/answers/:answer_id/comments', function (req, r
             body: req.body.content,
             createdAt: new Date(),
             answer_id: answer.id
-          }, ], // object
+          }], // object
           function (err, comment_created) {
             if (err) {
               console.log("Error: " + err);
@@ -758,7 +757,7 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
 //
 // Update comment given a question id and answer id and comment id
 //
-app.delete('/questions/:question_id/answers/:answer_id/comments/:comment_id', function (req, res) {
+app.del('/questions/:question_id/answers/:answer_id/comments/:comment_id', function (req, res) {
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
     if (err) {
@@ -874,7 +873,7 @@ app.post('/questions/:question_id/comments', function (req, res) {
           body: req.body.content,
           createdAt: new Date(),
           question_id: question.id
-        }, ], // object
+        }], // object
         function (err, comment_created) {
           if (err) {
             console.log("Error: " + err);
@@ -999,7 +998,7 @@ app.put('/questions/:question_id/comments/:comment_id', function (req, res) {
 //
 // Delete comment by ID
 //
-app.delete('/questions/:question_id/comments/:comment_id', function (req, res) {
+app.del('/questions/:question_id/comments/:comment_id', function (req, res) {
   console.log("PUT");
   req.models.question.exists({'id' : req.params.question_id}, function (err, questionExists) {
     console.log("questionExists: ", questionExists);
@@ -1053,8 +1052,8 @@ app.delete('/questions/:question_id/comments/:comment_id', function (req, res) {
 //
 app.get('/search?:q', function (req, res) {
   console.log("topic2 " + req.query.q);
-  var questions = [];
-  var i;
+  var questions = [], i;
+
   req.models.question.find({title: orm.like("%" + req.query.q + "%")}, function (err, results) {
     if (err) {
       console.log(err);
