@@ -1,0 +1,7 @@
+    {
+        "body": "ijklmniuyio",
+        "createdAt": "2014-12-08T20:24:59.012Z",
+        "id": 1,
+        "question_id": 1,
+        "answer_id": null
+    }

@@ -1,0 +1,7 @@
+    {
+        "body": "opqruyust",
+        "createdAt": "2014-12-08T20:26:11.955Z",
+        "id": 2,
+        "question_id": null,
+        "answer_id": 1
+    }

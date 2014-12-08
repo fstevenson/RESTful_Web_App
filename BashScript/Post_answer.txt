@@ -1,0 +1,6 @@
+    {
+        "body": "efghij",
+        "createdAt": "2014-12-08T20:23:57.006Z",
+        "id": 1,
+        "question_id": 1
+    }
