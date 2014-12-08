@@ -59,9 +59,6 @@ app.get('/', function (req, res) {
       if (questions.length > 0) {
         var json = JSON.stringify(questions);
         console.log("Accepts json " + json);
-        // res.setHeader('Content-Type', 'application/json');
-		    // res.status(200).json({data: true, message: "List of questions",
-		      // questions: JSON.stringify(questions)});
         res.send(JSON.stringify(questions));
       } else {
         res.setHeader('Content-Type', 'application/json');
