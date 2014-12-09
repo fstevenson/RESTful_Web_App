@@ -50,7 +50,6 @@ app.use(orm.express(database.connectionString, {
 }));
 
 app.use('/', routes);
-app.use('/test', routes);
 app.use('/public', express.static(__dirname + '/public'));
 app.use('*', routes);
 

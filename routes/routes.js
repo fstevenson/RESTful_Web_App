@@ -115,6 +115,9 @@ app.post('/questions', function (req, res) {
   if (req.is('json')  || req.is('application/json')
       || req.is('html') || req.is('text/html')
       || req.is('application/x-www-form-urlencoded')) {
+    if (!req.body) {
+      return res.status(400).send("There is bad syntax in the request");
+    }
     if (req.body.title === undefined || req.body.content === undefined
         || req.body.title.trim().length === 0 || req.body.content.trim().length === 0) {
       return res.status(400).send("There is bad syntax in the request");
@@ -219,6 +222,9 @@ app.put('/questions/:question_id', function (req, res) {
       }
       if (req.is('json') || req.is('application/json')
 	        || req.is('html') || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+        if (!req.body) {
+          return res.status(400).send("There is bad syntax in the request");
+        }
         if (req.body.content === undefined || req.body.content.trim().length === 0
 		        || req.body.title === undefined || req.body.title.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
@@ -351,6 +357,9 @@ app.post('/questions/:question_id/answers', function (req, res) {
     if (req.is('json') || req.is('application/json')
 	      || req.is('html') || req.is('text/html')
 	      || req.is('application/x-www-form-urlencoded')) {
+      if (!req.body) {
+        return res.status(400).send("There is bad syntax in the request");
+      }
       if (req.body.content === undefined || req.body.content.trim().length === 0) {
         return res.status(400).send("There is bad syntax in the request");
       }
@@ -469,6 +478,9 @@ app.put('/questions/:question_id/answers/:answer_id', function (req, res) {
           if (req.is('json') || req.is('application/json') ||
 		          req.is('html') || req.is('text/html')
 				      || req.is('application/x-www-form-urlencoded')) {
+            if (!req.body) {
+              return res.status(400).send("There is bad syntax in the request");
+            }
             if (req.body.content === undefined || req.body.content.trim().length === 0) {
               return res.status(400).send("There is bad syntax in the request");
             }
@@ -623,6 +635,9 @@ app.post('/questions/:question_id/answers/:answer_id/comments', function (req, r
       }
       if (req.is('json') || req.is('application/json') || req.is('html')
 	        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+        if (!req.body) {
+          return res.status(400).send("There is bad syntax in the request");
+        }
         if (req.body.content === undefined || req.body.content.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
         }
@@ -750,6 +765,9 @@ app.put('/questions/:question_id/answers/:answer_id/comments/:comment_id', funct
           }
           if (req.is('json') || req.is('application/json') || req.is('html')
 		          || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+            if (!req.body) {
+              return res.status(400).send("There is bad syntax in the request");
+            }
             if (req.body.content === undefined || req.body.content.trim().length === 0) {
               return res.status(400).send("There is bad syntax in the request");
             }
@@ -896,6 +914,9 @@ app.post('/questions/:question_id/comments', function (req, res) {
     console.log(req.body);
     if (req.is('json') || req.is('application/json') || req.is('html') || req.is('text/html')
 	      || req.is('application/x-www-form-urlencoded')) {
+      if (!req.body) {
+        return res.status(400).send("There is bad syntax in the request");
+      }
       if (req.body.content === undefined || req.body.content.trim().length === 0) {
         return res.status(400).send("There is bad syntax in the request");
       }
@@ -1002,6 +1023,9 @@ app.put('/questions/:question_id/comments/:comment_id', function (req, res) {
       console.log(req.get("Content-type"));
       if (req.is('json') || req.is('application/json') || req.is('html')
 	        || req.is('text/html') || req.is('application/x-www-form-urlencoded')) {
+        if (!req.body) {
+          return res.status(400).send("There is bad syntax in the request");
+        }
         if (req.body.content === undefined || req.body.content.trim().length === 0) {
           return res.status(400).send("There is bad syntax in the request");
         }
